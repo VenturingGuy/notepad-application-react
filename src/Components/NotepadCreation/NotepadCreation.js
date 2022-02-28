@@ -19,7 +19,6 @@ const NotepadCreation = (props) => {
           <input
             className="notepad__input title-input"
             type="text"
-            id="new-notepad-title"
             maxLength="255"
             placeholder="My notepad title..."
             value={notepadName}
@@ -30,16 +29,13 @@ const NotepadCreation = (props) => {
         <button 
           type="button"
           className="notepad__button save-button"
-          id="save-notepad"
           onClick={() => {
-            notepads.push({index: notepadIndex, title: notepadName, notes: {title: noteName, content: noteText}})
-            setNotepadIndex(notepadIndex + 1)
+            notepads.push({title: notepadName, notes: {title: noteName, content: noteText}})
             setNotepadName("")
             setNoteName("")
             setNoteText("")
             localStorage.setItem("Notepads", JSON.stringify(notepads))
             setNotepads(JSON.parse(localStorage.getItem("Notepads")))
-            console.log(notepads)
             }
           }
         >Save</button>
@@ -50,7 +46,6 @@ const NotepadCreation = (props) => {
           <input
             className="notepad__input"
             type="text"
-            id="new-note-title"
             maxLength="255"
             placeholder="Enter note title..."
             value={noteName}
@@ -59,7 +54,6 @@ const NotepadCreation = (props) => {
           />
           <input
             className="notepad__input"
-            id="new-note-text"
             maxLength="1000"
             placeholder="Enter note text..."
             value={noteText}
