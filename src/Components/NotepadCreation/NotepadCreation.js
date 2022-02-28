@@ -1,61 +1,76 @@
-const NotepadCreation = () => {
-  const storeNotepad = (e) => {
-    e.preventDefault();
-  };
+import React from "react"
+import { useState } from "react"
+
+const NotepadCreation = (props) => {
+  const [notepads, setNotepads] = props.functions
+  const [notepadName, setNotepadName] = useState('')
+  const [noteName, setNoteName] = useState('')
+  const [noteText, setNoteText] = useState('')
+  const [notepadIndex, setNotepadIndex] = useState(0)
+
   return(
     <section className="notepad__creation">
     <form 
-      onSubmit={storeNotepad}
       className="notepad__form"
-      >
+    >
       <div className="notepad__head new-notepad-title">
-        <label
-          className="notepad__label"
-          id="user-notepad"
-          htmlFor="new-notepad-title"
-          value="Notepad Title (Required)"
+        <label className="notepad__label" id="user-notepad" value="Notepad Title (Required)">
+          <h4>Notepad Title (Required)</h4>
+          <input
+            className="notepad__input title-input"
+            type="text"
+            id="new-notepad-title"
+            maxLength="255"
+            placeholder="My notepad title..."
+            value={notepadName}
+            onChange={e => setNotepadName(e.target.value)}
+            required
           />
-        <input
-          className="notepad__input title-input"
-          type="text"
-          name="new-notepad-title"
-          id="new-notepad-title"
-          maxLength="255"
-          placeholder="My notepad title..."
-          required
-          />
-        <button className="notepad__button save-button" id="save-notepad">Save</button>
+        </label>
+        <button 
+          type="button"
+          className="notepad__button save-button"
+          id="save-notepad"
+          onClick={() => {
+            notepads.push({index: notepadIndex, title: notepadName, notes: {title: noteName, content: noteText}})
+            setNotepadIndex(notepadIndex + 1)
+            setNotepadName("")
+            setNoteName("")
+            setNoteText("")
+            localStorage.setItem("Notepads", JSON.stringify(notepads))
+            setNotepads(JSON.parse(localStorage.getItem("Notepads")))
+            console.log(notepads)
+            }
+          }
+        >Save</button>
       </div>
-      <div className="notepad__head new-note-title">
-        <label
-          className="notepad__label"
-          htmlFor="note-title"
-          value="New Note (Required)"
+      <div className="notepad__head new-note">
+        <label className="notepad__label">
+          <h4>New Note(Required)</h4>
+          <input
+            className="notepad__input"
+            type="text"
+            id="new-note-title"
+            maxLength="255"
+            placeholder="Enter note title..."
+            value={noteName}
+            onChange={e => setNoteName(e.target.value)}
+            required
           />
-        <input
-          className="notepad__input"
-          type="text"
-          name="note-title"
-          id="new-note-title"
-          maxLength="255"
-          placeholder="Enter note title..."
-          required
+          <input
+            className="notepad__input"
+            id="new-note-text"
+            maxLength="1000"
+            placeholder="Enter note text..."
+            value={noteText}
+            onChange={e => setNoteText(e.target.value)}
+            required
           />
-      </div>
-      <div className="notepad__head new-note-text">
-        <input
-          className="notepad__input"
-          htmlFor="note-content"
-          name="note-text"
-          id="new-note-text"
-          maxLength="1000"
-          placeholder="Enter note text..."
-          required
-          />
+        </label>   
       </div>
     </form>
   </section>
   )
 }
 
-export default NotepadCreation;
+export default NotepadCreation
