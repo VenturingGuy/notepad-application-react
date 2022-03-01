@@ -17,7 +17,12 @@ function Notepad(props) {
               <input className="notepad__input title-input" value={notepadName} onChange={e => setNotepadName(e.target.value)}/>
               <div className="notepad__container button-container">
                 <button className="notepad__button view-stats">{"View Stats"}</button>
-                <button className="notepad__button save-button">{"Save"}</button>
+                <button className="notepad__button save-button"
+                  onClick={() =>{
+                    notepads[index] = {title: notepadName, notes: notes}
+                    localStorage.setItem("Notepads", JSON.stringify(notepads))
+                  }}
+                >{"Save"}</button>
                 <button className="notepad__button delete-button"
                   onClick={() => {
                     notepads.splice(index, 1)
