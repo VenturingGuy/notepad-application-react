@@ -15,7 +15,7 @@ function Notepad(props) {
           <form className="notepad__edit">
             <h5 className="notepad__label">Notepad Title</h5>
             <div className="notepad__head notepad-name">
-              <input className="notepad__input title-input" value={notepadName} onChange={e => setNotepadName(e.target.value)}/>
+              <input className="notepad__input title-input" value={notepadName} maxLength="255" onChange={e => setNotepadName(e.target.value)}/>
               <div className="notepad__container button-container">
                 <button className="notepad__button view-stats">{"View Stats"}</button>
                 <button className="notepad__button save-button"

@@ -9,8 +9,8 @@ const NoteCreation = (props) =>{
 
   return(
     <div className="notepad__head new-note">
-      <input className="notepad__input" value={noteName} onChange={e => setNoteName(e.target.value)} placeholder="Enter Note Title..."/>
-      <textarea className="notepad__input text-input" value={noteContent} onChange={e => setNoteContent(e.target.value)} placeholder="Enter Note..."/>
+      <input className="notepad__input" value={noteName} maxLength="255" onChange={e => setNoteName(e.target.value)} placeholder="Enter Note Title..."/>
+      <textarea className="notepad__input text-input" maxLength="1000" value={noteContent} onChange={e => setNoteContent(e.target.value)} placeholder="Enter Note..."/>
       <button className="notepad__button add-button"
       onClick={() => {
         notepads[index].notes.push({title: noteName, content: noteContent})
