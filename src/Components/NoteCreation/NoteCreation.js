@@ -12,9 +12,9 @@ const NoteCreation = (props) =>{
       <input className="notepad__input" value={noteName} maxLength="255" onChange={e => setNoteName(e.target.value)} placeholder="Enter Note Title..."/>
       <textarea className="notepad__input text-input" maxLength="1000" value={noteContent} onChange={e => setNoteContent(e.target.value)} placeholder="Enter Note..."/>
       <button className="notepad__button add-button"
-      onClick={() => {
+      onClick={(e) => {
+        e.preventDefault()
         notepads[index].notes.push({title: noteName, content: noteContent})
-        localStorage.setItem("Notepads", JSON.stringify(notepads))
       }}
       >{"Add"}</button>
     </div>
