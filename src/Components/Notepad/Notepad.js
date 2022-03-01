@@ -19,9 +19,15 @@ function Notepad(props) {
               <div className="notepad__container button-container">
                 <button className="notepad__button view-stats">View Stats</button>
                 <button className="notepad__button save-button"
-                  onClick={() =>{
-                    notepads[index] = {title: notepadName, notes: notes}
-                    localStorage.setItem("Notepads", JSON.stringify(notepads))
+                  onClick={(e) =>{
+                    if (notepadName === ""){
+                      e.preventDefault()
+                      alert("Notepad Title cannot be blank.")
+                    }
+                    else {
+                      notepads[index] = {title: notepadName, notes: notes}
+                      localStorage.setItem("Notepads", JSON.stringify(notepads))
+                    }
                   }}
                 >Save</button>
                 <button className="notepad__button delete-button"
