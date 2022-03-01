@@ -19,8 +19,11 @@ function App() {
           {notepads.map((notepad, index) =>(
             <Notepad
               title={notepad.title}
-              notes={notepad.notes}
+              notepad={notepad}
+              notes={notepads[index].notes}
+              notepads={notepads}
               key={index}
+              index={index}
             />
           ))}
         </section>

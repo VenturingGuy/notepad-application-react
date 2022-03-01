@@ -6,7 +6,6 @@ const NotepadCreation = (props) => {
   const [notepadName, setNotepadName] = useState('')
   const [noteName, setNoteName] = useState('')
   const [noteText, setNoteText] = useState('')
-  const [notepadIndex, setNotepadIndex] = useState(0)
 
   return(
     <section className="notepad__creation">
@@ -30,7 +29,7 @@ const NotepadCreation = (props) => {
           type="button"
           className="notepad__button save-button"
           onClick={() => {
-            notepads.push({title: notepadName, notes: {title: noteName, content: noteText}})
+            notepads.push({title: notepadName, notes: [{title: noteName, content: noteText}]})
             setNotepadName("")
             setNoteName("")
             setNoteText("")

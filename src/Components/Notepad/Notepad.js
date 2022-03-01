@@ -3,9 +3,7 @@ import NoteCreation from "../NoteCreation/NoteCreation"
 import Note from "../Note/Note"
 
 function Notepad(props) {
-  const { title, notes, index } = props
-  console.log(notes)
-  console.log(title)
+  const { title, notes, index, notepads } = props
   const [showNotepad, setShowNotepad] = useState(false)
   const [notepadName, setNotepadName] = useState(title)
   return(
@@ -24,12 +22,17 @@ function Notepad(props) {
               </div>
             </div>
             <h4>{"My Notes"}</h4>
-            <NoteCreation />
-            <Note
-              title={notes.title}
-              content={notes.content}
-              key={index}
+            <NoteCreation
+              notepads={notepads}
+              index={index}
             />
+            {notes.map((note, index) =>(
+              <Note
+                title={note.title}
+                content={note.content}
+                key={index}
+              />
+            ))}
           </form>
         </section>
       : null
