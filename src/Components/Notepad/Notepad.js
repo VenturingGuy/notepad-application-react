@@ -3,7 +3,8 @@ import NoteCreation from "../NoteCreation/NoteCreation"
 import Note from "../Note/Note"
 
 function Notepad(props) {
-  const { title, notes, index, notepads } = props
+  const { title, notes, index, notepad, notepads } = props
+  console.log(notes)
   const [showNotepad, setShowNotepad] = useState(false)
   const [notepadName, setNotepadName] = useState(title)
   return(
@@ -40,6 +41,9 @@ function Notepad(props) {
               <Note
                 title={note.title}
                 content={note.content}
+                notepad={notepad}
+                notepads = {notepads}
+                index={index}
                 key={index}
               />
             ))}
