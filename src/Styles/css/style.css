@@ -102,6 +102,9 @@ textarea {
     min-width: 5%;
     max-width: 12.5%;
   }
+  .notepad__button.notepad-creation {
+    display: flex;
+  }
 }
 .notepad__container {
   display: flex;

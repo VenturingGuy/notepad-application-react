@@ -9,9 +9,9 @@ const NotepadCreation = (props) => {
 
   return(
     <section className="notepad__creation">
-    <form 
-      className="notepad__form"
-    >
+      <form 
+        className="notepad__form"
+      >
       <div className="notepad__head new-notepad-title">
         <label className="notepad__label" id="user-notepad" value="Notepad Title (Required)">
           <h4>Notepad Title (Required)</h4>

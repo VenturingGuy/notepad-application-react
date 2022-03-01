@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 function App() {
   const [notepads, setNotepads] = useState(JSON.parse(localStorage.getItem("Notepads")) || [])
+  const [showNewForm, setShowNewForm] = useState(false)
   
   return (
     <div className="app">
@@ -27,9 +28,12 @@ function App() {
             />
           ))}
         </section>
-        <NotepadCreation
-          functions={[notepads, setNotepads]}
-        />
+        <button className="notepad__button notepad-creation" onClick={() => setShowNewForm(!showNewForm)}>{"New Notepad"}</button>
+        {showNewForm ? 
+          <NotepadCreation
+            functions={[notepads, setNotepads]}
+          />
+        : null}
       </div>
       </main>
     </div>

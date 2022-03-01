@@ -76,6 +76,9 @@ textarea {
         min-width: 5%;
         max-width: 12.5%;
       }
+      &.notepad-creation {
+        display: flex;
+      }
     }
   }
   &__container{
