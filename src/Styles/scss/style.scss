@@ -51,6 +51,10 @@ h2, h3, h4, h5 {
   }
 }
 
+h3:hover {
+  cursor: pointer;
+}
+
 textarea {
   resize: none;
 }
@@ -81,12 +85,10 @@ textarea {
     &.button-container{
       @media (min-width: 1024px){
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: space-between;
         width: 30%;
-        &.update-delete {
-          margin: 0.5rem 0.25rem;
-          width: fit-content;
-          justify-content: space-between;
+        &.update-delete-button {
+          justify-content: flex-start;
         }
       }
     }
@@ -119,7 +121,7 @@ textarea {
     margin: 0.75rem 0;
     @media (min-width: 1024px){
       flex-direction: row;
-      &.new-note, &.new-notepad-title, &.new-note-title{
+      &.new-note, &.edit-note, &.new-notepad-title, &.new-note-title{
         flex-direction: column;
         button {
           margin: 0.5rem 0.25rem;
@@ -169,11 +171,6 @@ textarea {
   background: $red;
 }
 
-.update-button {
-  @media (min-width: 1024px){
-    margin-right: 1rem;
-  }
-}
 .add-button, .save-button, .update-button, .delete-button{
   color: $white;
 }

@@ -77,6 +77,10 @@ h1 {
   }
 }
 
+h3:hover {
+  cursor: pointer;
+}
+
 textarea {
   resize: none;
 }
@@ -107,13 +111,11 @@ textarea {
 @media (min-width: 1024px) {
   .notepad__container.button-container {
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 30%;
   }
-  .notepad__container.button-container.update-delete {
-    margin: 0.5rem 0.25rem;
-    width: fit-content;
-    justify-content: space-between;
+  .notepad__container.button-container.update-delete-button {
+    justify-content: flex-start;
   }
 }
 @media (min-width: 1024px) {
@@ -147,10 +149,10 @@ textarea {
   .notepad__head {
     flex-direction: row;
   }
-  .notepad__head.new-note, .notepad__head.new-notepad-title, .notepad__head.new-note-title {
+  .notepad__head.new-note, .notepad__head.edit-note, .notepad__head.new-notepad-title, .notepad__head.new-note-title {
     flex-direction: column;
   }
-  .notepad__head.new-note button, .notepad__head.new-notepad-title button, .notepad__head.new-note-title button {
+  .notepad__head.new-note button, .notepad__head.edit-note button, .notepad__head.new-notepad-title button, .notepad__head.new-note-title button {
     margin: 0.5rem 0.25rem;
   }
 }
@@ -196,12 +198,6 @@ textarea {
 
 .delete-button {
   background: #ec3646;
-}
-
-@media (min-width: 1024px) {
-  .update-button {
-    margin-right: 1rem;
-  }
 }
 
 .add-button, .save-button, .update-button, .delete-button {

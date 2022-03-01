@@ -51,7 +51,7 @@ const NotepadCreation = (props) => {
             onChange={e => setNoteName(e.target.value)}
             required
           />
-          <input
+          <textarea
             className="notepad__input"
             maxLength="1000"
             placeholder="Enter note text..."
