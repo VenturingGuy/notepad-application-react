@@ -18,7 +18,12 @@ function Notepad(props) {
               <div className="notepad__container button-container">
                 <button className="notepad__button view-stats">{"View Stats"}</button>
                 <button className="notepad__button save-button">{"Save"}</button>
-                <button className="notepad__button delete-button">{"Delete"}</button>
+                <button className="notepad__button delete-button"
+                  onClick={() => {
+                    notepads.splice(index, 1)
+                    localStorage.setItem("Notepads", JSON.stringify(notepads))
+                  }}
+                >{"Delete"}</button>
               </div>
             </div>
             <h4>{"My Notes"}</h4>
