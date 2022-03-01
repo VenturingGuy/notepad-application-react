@@ -1,7 +1,7 @@
 import NotepadCreation from './Components/NotepadCreation/NotepadCreation';
 import Notepad from './Components/Notepad/Notepad';
 
-import './App.css';
+import './Styles/css/style.css'
 import { useState } from 'react';
 
 function App() {

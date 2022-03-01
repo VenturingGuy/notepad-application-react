@@ -1,0 +1,184 @@
+@import "./_colors";
+@import "./_typography";
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+html, body {
+  height: 100vh;
+  text-align: center;
+  justify-content: center;
+  
+}
+body {
+  max-width: 1024px;
+  background: $body-background;
+}
+
+
+main {
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: $white;
+  border-radius: 4px;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+
+h1 {
+  padding: 0.25rem 0;
+  margin: 0.75rem 0;
+  align-self: center;
+  @media (min-width: 1024px) {
+    padding: 0.25rem 0;
+    margin: 1rem;
+    width: fit-content;
+    align-self: start;
+  }
+}
+
+h2, h3, h4, h5 {
+  @media (min-width: 1024px) {
+    width: fit-content;
+    align-self: start;
+    margin: 0.25rem;
+  }
+}
+
+textarea {
+  resize: none;
+}
+
+.notepad {
+  &__button {
+    min-width: 30%;
+    border: none;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    font-weight: bold;
+    &:hover {
+      cursor: pointer;
+    }
+    @media (min-width: 1024px) {
+      &.add-button, &.notepad-creation {
+        margin: 0.5rem 0.25rem;
+        min-width: 5%;
+        max-width: 12.5%;
+      }
+    }
+  }
+  &__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &.button-container{
+      @media (min-width: 1024px){
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 30%;
+        &.update-delete {
+          margin: 0.5rem 0.25rem;
+          width: fit-content;
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+  &__creation {
+    @media (min-width: 1024px){
+      display: flex;
+      .notepad__form{
+        width: 100%;
+      }
+      .save-button {
+        min-width: fit-content;
+        max-width: 12.5%;
+      }
+    }
+  }
+  &__edit, &__entry {
+    padding: 0.25rem 0;
+    margin: 0.5rem 0;
+  }
+  &__form {
+    @media (min-width: 1024px){
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  &__head {
+    display: flex;
+    flex-direction: column;
+    margin: 0.75rem 0;
+    @media (min-width: 1024px){
+      flex-direction: row;
+      &.new-note, &.new-notepad-title, &.new-note-title{
+        flex-direction: column;
+        button {
+          margin: 0.5rem 0.25rem;
+        }
+      }
+    }
+    &.notepad-name{
+      justify-content: space-between;
+    }
+  }
+  &__input {
+    padding: 1em;
+    margin: 0.25rem;
+    &.text-input{
+      min-height: 10rem;
+    }
+    &.title-input{
+      @media (min-width: 1024px){
+        width: 35%;
+      }
+    }
+    @media (min-width: 1024px) {
+      width: 60%;
+      
+    }
+  }
+  &__label {
+    @media (min-width: 1024px){
+      align-self: start;
+      min-width: fit-content;
+      margin: 0.25rem;
+    }
+  }
+  &__savednotepads {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.add-button {
+  background: $green;
+}
+.save-button, .update-button {
+  background: $blue;
+}
+.delete-button {
+  background: $red;
+}
+
+.update-button {
+  @media (min-width: 1024px){
+    margin-right: 1rem;
+  }
+}
+.add-button, .save-button, .update-button, .delete-button{
+  color: $white;
+}
+
+::placeholder {
+  color: $placeholder;
+}
+
