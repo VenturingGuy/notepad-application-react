@@ -15,13 +15,13 @@ function Note(props) {
             e.preventDefault()
             notepad.notes[index] = {title: title, content: content}
           }}
-          >{"Update"}</button>
+          >Update</button>
           <button className="notepad__button delete-button"
             onClick={() =>{
               notepad.notes.splice(index, 1)
               localStorage.setItem("Notepads", JSON.stringify(notepads))
             }}
-          >{"Delete"}</button>
+          >Delete</button>
         </div>
       </div>
       )

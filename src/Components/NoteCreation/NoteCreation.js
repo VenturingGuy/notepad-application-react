@@ -16,7 +16,7 @@ const NoteCreation = (props) =>{
         e.preventDefault()
         notepads[index].notes.push({title: noteName, content: noteContent})
       }}
-      >{"Add"}</button>
+      >Add</button>
     </div>
   )
 }
