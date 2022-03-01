@@ -28,7 +28,7 @@ function App() {
             />
           ))}
         </section>
-        <button className="notepad__button notepad-creation" onClick={() => setShowNewForm(!showNewForm)}>{"New Notepad"}</button>
+        <button className="notepad__button notepad-creation" onClick={() => setShowNewForm(!showNewForm)}>{showNewForm ? "Cancel" : "New Notepad"}</button>
         {showNewForm ? 
           <NotepadCreation
             functions={[notepads, setNotepads]}

@@ -158,6 +158,12 @@ textarea {
   .notepad__head.new-note button, .notepad__head.edit-note button, .notepad__head.new-notepad-title button, .notepad__head.new-note-title button {
     margin: 0.5rem 0.25rem;
   }
+  .notepad__head label {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 }
 .notepad__head.notepad-name {
   justify-content: space-between;
@@ -179,11 +185,17 @@ textarea {
     width: 60%;
   }
 }
+.notepad__label .notepad__input {
+  width: 100%;
+}
 @media (min-width: 1024px) {
   .notepad__label {
     align-self: start;
     min-width: fit-content;
     margin: 0.25rem;
+  }
+  .notepad__label .notepad__input {
+    width: 60%;
   }
 }
 .notepad__savednotepads {
