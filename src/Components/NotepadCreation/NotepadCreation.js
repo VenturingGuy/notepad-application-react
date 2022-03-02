@@ -29,12 +29,17 @@ const NotepadCreation = (props) => {
           type="button"
           className="notepad__button save-button"
           onClick={() => {
-            notepads.push({title: notepadName, notes: [{title: noteName, content: noteText}]})
-            setNotepadName("")
-            setNoteName("")
-            setNoteText("")
-            localStorage.setItem("Notepads", JSON.stringify(notepads))
-            setNotepads(JSON.parse(localStorage.getItem("Notepads")))
+            if (notepadName.trim() === "" || noteName.trim() === "" || noteText.trim() === ""){
+              alert("Notepad must have a non-blank name, note title, and note content.")
+            }
+            else{
+              notepads.push({title: notepadName, notes: [{title: noteName, content: noteText}]})
+              setNotepadName("")
+              setNoteName("")
+              setNoteText("")
+              localStorage.setItem("Notepads", JSON.stringify(notepads))
+              setNotepads(JSON.parse(localStorage.getItem("Notepads")))
+            }
             }
           }
         >Save</button>
