@@ -14,7 +14,7 @@ const NoteCreation = (props) =>{
       <button className="notepad__button add-button"
       onClick={(e) => {
         e.preventDefault()
-        if (noteName === '' || noteContent === ''){
+        if (noteName.trim() === '' || noteContent.trim() === ''){
           alert("Note title and content cannot be blank.")
         }
         else{

@@ -20,7 +20,7 @@ function Notepad(props) {
                 <button className="notepad__button view-stats">View Stats</button>
                 <button className="notepad__button save-button"
                   onClick={(e) =>{
-                    if (notepadName === ""){
+                    if (notepadName.trim() === ""){
                       e.preventDefault()
                       alert("Notepad Title cannot be blank.")
                     }

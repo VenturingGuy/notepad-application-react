@@ -4,7 +4,7 @@ function Note(props) {
   const [title, setTitle] = useState(props.title)
   const [content, setContent] = useState(props.content)
   const {notepad, notepads, index} = props
-  console.log(notepad)
+  
   return(
       <div className="notepad__head edit-note">
         <input className="notepad__input" value={title} maxLength="255" onChange={e => setTitle(e.target.value)}/>
@@ -13,7 +13,7 @@ function Note(props) {
           <button className="notepad__button update-button"
           onClick={(e) =>{
             e.preventDefault()
-            if (title === '' || content === ''){
+            if (title.trim() === '' || content.trim() === ''){
               alert("Note title and content cannot be blank.")
             }
             else{
