@@ -13,7 +13,13 @@ function Note(props) {
           <button className="notepad__button update-button"
           onClick={(e) =>{
             e.preventDefault()
-            notepad.notes[index] = {title: title, content: content}
+            if (title === '' || content === ''){
+              alert("Note title and content cannot be blank.")
+            }
+            else{
+              alert("Note updated! Press the Save button up top once you're ready to save the changes.")
+              notepad.notes[index] = {title: title, content: content}
+            }
           }}
           >Update</button>
           <button className="notepad__button delete-button"
