@@ -17,7 +17,7 @@ function Note(props) {
               alert("Note title and content cannot be blank.")
             }
             else{
-              alert("Note updated! Press the Save button up top once you're ready to save the changes.")
+              alert("Note updated! Click the save button to save changes.")
               notepad.notes[index] = {title: title, content: content}
             }
           }}

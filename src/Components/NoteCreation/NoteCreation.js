@@ -14,7 +14,13 @@ const NoteCreation = (props) =>{
       <button className="notepad__button add-button"
       onClick={(e) => {
         e.preventDefault()
-        notepads[index].notes.push({title: noteName, content: noteContent})
+        if (noteName === '' || noteContent === ''){
+          alert("Note title and content cannot be blank.")
+        }
+        else{
+          alert("Note added! Click the Save button to save changes.")
+          notepads[index].notes.push({title: noteName, content: noteContent})
+        }
       }}
       >Add</button>
     </div>
