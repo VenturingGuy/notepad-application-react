@@ -6,7 +6,7 @@ const NoteCreation = (props) =>{
   const notepads = props.notepads
   const [noteName, setNoteName] = useState('')
   const [noteContent, setNoteContent] = useState('')
-
+  
   return(
     <div className="notepad__head new-note">
       <input className="notepad__input" value={noteName} maxLength="255" onChange={e => setNoteName(e.target.value)} placeholder="Enter Note Title..."/>
@@ -16,6 +16,9 @@ const NoteCreation = (props) =>{
         e.preventDefault()
         if (noteName.trim() === '' || noteContent.trim() === ''){
           alert("Note title and content cannot be blank.")
+        } 
+        else if(notepads[index].notes.map(element => element.title === noteName)){
+          alert("A note with that title already exists in this Notepad.")
         }
         else{
           alert("Note added! Click the Save button to save changes.")
