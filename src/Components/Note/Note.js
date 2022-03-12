@@ -10,17 +10,19 @@ function Note(props) {
       <input className="notepad__input" value={title} maxLength="255" onChange={e => setTitle(e.target.value)}/>
       <textarea className="notepad__input" value={content} maxLength="1000" onChange={e => setContent(e.target.value)}/>
       <div className="notepad__container button-container update-delete-button">
-        <button className="notepad__button update-button"
-        onClick={(e) =>{
-          e.preventDefault()
-          if (title.trim() === '' || content.trim() === ''){
-            alert("Note title and content cannot be blank.")
+        <button
+          className="notepad__button update-button"
+          onClick={(e) =>{
+            e.preventDefault()
+            if (title.trim() === '' || content.trim() === ''){
+              alert("Note title and content cannot be blank.")
+            }
+            else{
+              alert("Note updated! Click the save button to save changes.")
+              notepad.notes[index] = {title: title, content: content}
+            }
           }
-          else{
-            alert("Note updated! Click the save button to save changes.")
-            notepad.notes[index] = {title: title, content: content}
-          }
-        }}
+        }
         >Update</button>
         <button className="notepad__button delete-button"
           onClick={() =>{

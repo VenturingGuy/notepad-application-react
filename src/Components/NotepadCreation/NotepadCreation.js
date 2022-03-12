@@ -1,7 +1,7 @@
 import React from "react"
 import { useState } from "react"
 
-const NotepadCreation = (props) => {
+function NotepadCreation(props){
   const [notepads, setNotepads] = props.functions
   const [notepadName, setNotepadName] = useState('')
   const [noteName, setNoteName] = useState('')

@@ -1,7 +1,7 @@
 import React from "react"
 import { useState } from "react"
 
-const NoteCreation = (props) =>{
+function NoteCreation(props){
   const index = props.index
   const notepads = props.notepads
   const [noteName, setNoteName] = useState('')
