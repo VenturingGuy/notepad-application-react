@@ -24,7 +24,7 @@ function NoteCreation(props){
         if (noteName.trim() === '' || noteContent.trim() === ''){
           alert("Note title and content cannot be blank.")
         } 
-        else if(notepads[index].notes.map(element => element.title === noteName)){
+        else if(notepads[index].notes.some(note => note.title === noteName)){
           alert("A note with that title already exists in this Notepad.")
         }
         else{
