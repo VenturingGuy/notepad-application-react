@@ -97,7 +97,7 @@ textarea {
   cursor: pointer;
 }
 @media (min-width: 1024px) {
-  .notepad__button.add-button, .notepad__button.notepad-creation {
+  .notepad__button.add-button, .notepad__button.notepad-creation, .notepad__button.graph-button {
     margin: 0.5rem 0.25rem;
     min-width: 5%;
     max-width: 12.5%;

@@ -75,14 +75,17 @@ function Graph(props) {
   // Renders both graphs
   return(
     <div>
+      {/* Maybe tie this to a map/for loop? ie. <Line /> + <button>Load More</button> */}
       <Line
         data={gistData}
         options={gistOptions}
       />
+      <button className="notepad__button graph-button" id="load-gists">Load More</button>
       <Line
         data={filesData}
         options={filesOptions}
       />
+      <button className="notepad__button graph-button" id="load-files">Load More</button>
     </div>
   )
 }
