@@ -4,7 +4,7 @@ import { Chart as ChartJS } from "chart.js/auto" // Note: This is REQUIRED in or
 
 function Graph(props) {
   // Passes the data from props, stores it to a variable for use with the graphs ChartJS.
-  const { data } = props
+  const { data, secretSetup } = props
   const gistDataset = data
   
   // Data for the first graph, gists created per 5 second bucket.
@@ -80,12 +80,12 @@ function Graph(props) {
         data={gistData}
         options={gistOptions}
       />
-      <button className="notepad__button graph-button" id="load-gists">Load More</button>
+      <button className="notepad__button graph-button" id="load-gists" onClick={secretSetup}>Load More</button>
       <Line
         data={filesData}
         options={filesOptions}
       />
-      <button className="notepad__button graph-button" id="load-files">Load More</button>
+      <button className="notepad__button graph-button" id="load-files" onClick={secretSetup}>Load More</button>
     </div>
   )
 }

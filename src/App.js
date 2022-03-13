@@ -27,14 +27,18 @@ function App() {
     gists is set to the reverse of the response data because the octokit request returns the gists from latest to earliest.
     The way this code is set up, we want it organized from earliest to latest, thus reverse.
   */
+    
   useEffect(() => {
     async function onLoad(){
-      const res = await octokit.request('GET /gists/public')
+      const res = await octokit.request('GET /gists/public', {per_page: 30})
+      
       setGists(res.data.reverse())
-    } 
+    }
     onLoad()
       .catch(console.error)
   }, [])
+
+  console.log(gists)
   
   return (
     <div className="app">
@@ -61,7 +65,7 @@ function App() {
               ))}
             </section>
             {/* button toggles new notepad form display */}
-            <button className="notepad__button notepad-creation" onClick={() => setShowNewForm(!showNewForm)}>{showNewForm ? "Cancel" : "New Notepad"}</button>
+            <button className="notepad__button notepad-creation" onClick={() => {setShowNewForm(!showNewForm)}}>{showNewForm ? "Cancel" : "New Notepad"}</button>
             {showNewForm && 
               <NotepadCreation
                 functions={[notepads, setNotepads]}

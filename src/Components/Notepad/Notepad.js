@@ -13,12 +13,22 @@ function Notepad(props) {
   
   const [data, setData] = useState([])
   const [buckets, setBuckets] = useState([])
+
+  console.log(gists)
   
   function handleSubmit(e) {
     // prevents default button behavior and toggles notepad display
     e.preventDefault()
+    if (buckets.length < 1){
+      secretSetup(e)
+    }
     setShowNotepad(!showNotepad)
 
+    
+  }
+
+  function secretSetup(e) {
+    e.preventDefault()
     /* 
       initTime refers to the first time that will be used as a reference for the graph.
       Currently, the idea is that it will start at the earliest created_at time in the gists data.
@@ -26,41 +36,54 @@ function Notepad(props) {
       use the last time in the current set of data displayed as a starting point.
       (i.e when you click load more, it will start from there and add more times. **still in progress)
     */
-    const initTime = new Date(buckets.length > 1 ?  buckets[buckets.length - 1].date : gists[0].created_at)
-
-    /*
-      This if statement is currently here to cover my tracks - will need to determine a more effective way to handle this.
-      As is, the if statement prevents the logic from creating more buckets that will eventually not accurately display
-      the data we want shown.
-      Currently, it's attached to the same h3 that toggles the title. This will need to change if we want it to use pagination.
-      Possibly, we have it call a separate function the first time to start from 0, and use the "Load More" to call it subsequently.
-    */
-    if (buckets.length < 1){
-      // refer to pushBuckets comment below for functionality
-      pushBuckets(initTime)
-      // console.log(buckets)
-      // Iterates through each bucket (currently array size 8)
-      for (let i=0; i<buckets.length; i+=1){
-        /*
-          The current intention is that each of the gists created_at attribute is compared to the bucket time (both compared in milliseconds).
-          For example, created_at of 10:23:15 to bucket time of 10:23:09.
-          In this scenario, the second for loop breaks as the difference in time is greater than (non-negative) 5 seconds, so we move on to the next bucket.
-          Otherwise, it's "recorded" by increasing the count (referring to the number of gists created in this span of 5 seconds).
-          Additionally, the number of files in each gist is added to that bucket.
-        */
-        for (let j=0; j<gists.length; j+=1){
-          if (new Date(gists[j].created_at).getTime() - buckets[i].time >= 5000){
-            break
-          }
-          else{  
-            buckets[i].count += 1
+      const initTime = new Date(buckets.length > 1 ?  buckets[buckets.length - 1].date.getTime() + 5000 : gists[0].created_at)
+      /*
+        This if statement is currently here to cover my tracks - will need to determine a more effective way to handle this.
+        As is, the if statement prevents the logic from creating more buckets that will eventually not accurately display
+        the data we want shown.
+        Currently, it's attached to the same h3 that toggles the title. This will need to change if we want it to use pagination.
+        Possibly, we have it call a separate function the first time to start from 0, and use the "Load More" to call it subsequently.
+      */
+      // 
+        // refer to pushBuckets comment below for functionality
+        pushBuckets(initTime)
+        // Iterates through each bucket (inits at 8, adds 8 every time buckets gets updates)
+        let count = 0
+        let files = 0
+        for (let i=0; i<buckets.length; i+=1){
+          /*
+            The current intention is that each of the gists created_at attribute is compared to the bucket time (both compared in milliseconds).
+            For example, created_at of 10:23:15 to bucket time of 10:23:09.
+            In this scenario, the second for loop breaks as the difference in time is greater than (non-negative) 5 seconds, so we move on to the next bucket.
+            **Furthermore, if the difference in time is less than 0 (negative), the gist for loop moves on to the next gist rather than continuously add to count.
+            Otherwise, it's "recorded" by increasing the count (referring to the number of gists created in this span of 5 seconds).
+            Additionally, the number of files in each gist is added to that bucket.
+          */
+          for (let j=0; j<gists.length; j+=1){
+            if (new Date(gists[j].created_at).getTime() - buckets[i].time >= 5000){
+              break
+            }
+            else if (new Date(gists[j].created_at).getTime() - buckets[i].time < 0){
+              continue
+            }  
+            count +=1
             // The underscore input allows us to conveniently get the number of file objects in the object.
-            buckets[i].files += parseInt(_.size(gists[j].files))
+            files += parseInt(_.size(gists[j].files))
           }
+          buckets[i].count = count
+          buckets[i].files = files
+          count = 0
+          files = 0
         }
-      }
-      setData(buckets)
-    }
+        setData(buckets)
+        /*
+          This is probably not the way I'd go about this, but...
+          This will very quickly refresh the state of the graph so that more data will appear on it.
+        */
+        if (graph){
+          setGraph(false)
+          setTimeout(() => {setGraph(true)}, 10)
+        }
   }
 
   /*
@@ -94,7 +117,7 @@ function Notepad(props) {
       {showNotepad && 
         <section className="notepad__current">
           <form className="notepad__edit">
-            {graph && <Graph data={data}/>}
+            {graph && <Graph data={data} secretSetup={secretSetup}/>}
             <h5 className="notepad__label">Notepad Title</h5>
             <div className="notepad__head notepad-name">
               {/* Changes notepad name independently of the title, will not save until saved to local storage. */}
