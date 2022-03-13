@@ -6,6 +6,7 @@ function Graph(props) {
   // Passes the data from props, stores it to a variable for use with the graphs ChartJS.
   const { data, secretSetup } = props
   const gistDataset = data
+  console.log(data)
   
   // Data for the first graph, gists created per 5 second bucket.
   const [gistData, setGistData] = useState({
@@ -15,8 +16,9 @@ function Graph(props) {
         label: "Gists Created",
         data: gistDataset.map((data) => data.count),
         backgroundColor: [
-          "rgba(75,192,192,1)", 
+          "green", 
         ],
+        Color: "red",
         borderColor: "black",
         borderWidth: 2,
       },
@@ -41,6 +43,18 @@ function Graph(props) {
   
   // Formatting for gists graph.
   const [gistOptions, setGistOptions] = useState({
+    plugins: {
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: "Gists Created",
+        font: {
+          size: 16
+        }
+      }
+    },
     scales: {
       y: {
         beginAtZero: true,
@@ -57,6 +71,18 @@ function Graph(props) {
 
   // Formatting for files graph.
   const [filesOptions, setFilesOptions] = useState({
+    plugins: {
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: "Files per Gist",
+        font: {
+          size: 16
+        }
+      }
+    },
     scales: {
       y: {
         beginAtZero: true,
@@ -72,9 +98,11 @@ function Graph(props) {
     }
   })
 
+  
+
   // Renders both graphs
   return(
-    <div>
+    <div className="notepad__graph">
       {/* Maybe tie this to a map/for loop? ie. <Line /> + <button>Load More</button> */}
       <Line
         data={gistData}

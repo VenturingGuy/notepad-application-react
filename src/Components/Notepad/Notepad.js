@@ -14,17 +14,13 @@ function Notepad(props) {
   const [data, setData] = useState([])
   const [buckets, setBuckets] = useState([])
 
-  console.log(gists)
-  
   function handleSubmit(e) {
     // prevents default button behavior and toggles notepad display
     e.preventDefault()
     if (buckets.length < 1){
       secretSetup(e)
     }
-    setShowNotepad(!showNotepad)
-
-    
+    setShowNotepad(!showNotepad)  
   }
 
   function secretSetup(e) {
@@ -77,8 +73,9 @@ function Notepad(props) {
         }
         setData(buckets)
         /*
-          This is probably not the way I'd go about this, but...
+          This is probably not the way I'd want to go about this, but...
           This will very quickly refresh the state of the graph so that more data will appear on it.
+          This should definitely be changed.
         */
         if (graph){
           setGraph(false)

@@ -30,7 +30,7 @@ function App() {
     
   useEffect(() => {
     async function onLoad(){
-      const res = await octokit.request('GET /gists/public', {per_page: 30})
+      const res = await octokit.request('GET /gists/public', {per_page: 100})
       
       setGists(res.data.reverse())
     }
