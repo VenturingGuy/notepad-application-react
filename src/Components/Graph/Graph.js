@@ -1,13 +1,15 @@
 import  { Line } from "react-chartjs-2"
-import { useState } from "react";
-import { Chart as ChartJS } from "chart.js/auto";
+import { useState } from "react"
+import { Chart as ChartJS } from "chart.js/auto" // Note: This is REQUIRED in order for the charts to render. 
 
 function Graph(props) {
+  // Passes the data from props, stores it to a variable for use with the graphs ChartJS.
   const { data } = props
   const gistDataset = data
   
+  // Data for the first graph, gists created per 5 second bucket.
   const [gistData, setGistData] = useState({
-    labels: gistDataset.map((data) => data.date.toLocaleTimeString("en-US")),
+    labels: gistDataset.map((data) => data.date.toLocaleTimeString("en-US")), // formats to HH:MM::SS AM/PM
     datasets: [
       {
         label: "Gists Created",
@@ -21,8 +23,9 @@ function Graph(props) {
     ],
   })
 
+  // Data for the first graph, files per gist created per 5 second bucket.
   const [filesData, setFilesData] = useState({
-    labels: gistDataset.map((data) => data.date.toLocaleTimeString("en-US")),
+    labels: gistDataset.map((data) => data.date.toLocaleTimeString("en-US")), // formats to HH:MM::SS AM/PM
     datasets: [
       {
         label: "Files per Gist",
@@ -35,7 +38,8 @@ function Graph(props) {
       },
     ],
   })
-
+  
+  // General formatting for both graphs, currently sets y axis to start at 0.
   const [userOptions, setUserOptions] = useState({
     scales: {
       y: {
@@ -44,6 +48,7 @@ function Graph(props) {
     }
   })
 
+  // Renders both graphs
   return(
     <div>
       <Line

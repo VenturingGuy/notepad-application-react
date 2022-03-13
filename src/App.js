@@ -1,48 +1,37 @@
 import NotepadCreation from './Components/NotepadCreation/NotepadCreation';
 import Notepad from './Components/Notepad/Notepad';
-
 import './Styles/css/style.css'
-import { useState, useEffect } from 'react';
 
+import { useState, useEffect } from 'react';
 
 import { Octokit } from "@octokit/rest"
 
-
-
+// Octokit import uses a unique authorization token saved in .env file
 const octokit = new Octokit({
   auth: process.env.REACT_APP_GH
 })
 
-
-
 function App() {
+  // Notepads begins as blank array, later saved to local storage and sets itself to whatever is stored in localStorage.
   const [notepads, setNotepads] = useState(JSON.parse(localStorage.getItem("Notepads")) || [])
+
+  // gists initializes to null (this affects conditional rendering below), async function onLoad sets gists to an array
+  const [gists, setGists] = useState(null)
+
+  // affected by notepad-creation button, false by default, toggles new notepad form display
   const [showNewForm, setShowNewForm] = useState(false)
   
-  const [gists, setGists] = useState(false)
-  const [buckets, setBuckets] = useState([])
-
-  function bucketCreation() {
-    const initTime = new Date(gists[gists.length].created_at)
-    console.log(initTime)
-    for (let i=0; i<8; i+=1){
-      setBuckets([...buckets, {
-        date: new Date(initTime.getTime() + 5000 * i),
-        time: initTime.getTime() + 5000 * i,
-        count: 0,
-        files: 0
-      }])
-    }
-  }
-  
-
-  useEffect(() =>{
+  /* 
+    On page load, this function will perform a call using the github gists API.
+    By default, gists returns 30 gist objects, with the most relevant attribute being created_at.
+    gists is set to the reverse of the response data because the octokit request returns the gists from latest to earliest.
+    The way this code is set up, we want it organized from earliest to latest, thus reverse.
+  */
+  useEffect(() => {
     async function onLoad(){
       const res = await octokit.request('GET /gists/public')
       setGists(res.data.reverse())
-    }
-
-   
+    } 
     onLoad()
       .catch(console.error)
   }, [])
@@ -53,11 +42,12 @@ function App() {
         <h1>Notepad Application</h1>
       </header>
       <main>
+        {/* main content will display as loading until async function resolves */}
         {gists ? 
           <div className="notepad">
             <section className="notepad__savednotepads">
               <h2>My Notepads</h2>
-              
+              {/* renders a Notepad for every notepad currently stored */}
               {notepads.map((notepad, index) =>(
                 <Notepad
                   title={notepad.title}
@@ -70,6 +60,7 @@ function App() {
                 />
               ))}
             </section>
+            {/* button toggles new notepad form display */}
             <button className="notepad__button notepad-creation" onClick={() => setShowNewForm(!showNewForm)}>{showNewForm ? "Cancel" : "New Notepad"}</button>
             {showNewForm && 
               <NotepadCreation
@@ -80,7 +71,7 @@ function App() {
           : <h1>Loading...</h1>}
       </main>
     </div>
-  );
+  )
 }
 
 export default App;
