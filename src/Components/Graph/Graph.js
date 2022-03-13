@@ -31,7 +31,7 @@ function Graph(props) {
         label: "Files per Gist",
         data: gistDataset.map((data) => data.files),
         backgroundColor: [
-          "rgba(75,192,192,1)",
+          "rgba(75,192,192,1)", 
         ],
         borderColor: "black",
         borderWidth: 2,
@@ -39,11 +39,35 @@ function Graph(props) {
     ],
   })
   
-  // General formatting for both graphs, currently sets y axis to start at 0.
-  const [userOptions, setUserOptions] = useState({
+  // Formatting for gists graph.
+  const [gistOptions, setGistOptions] = useState({
     scales: {
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: "Number of Gists",
+          font: {
+            size: 16
+          }
+        }
+      }
+    }
+  })
+
+  // Formatting for files graph.
+  const [filesOptions, setFilesOptions] = useState({
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: "Number of Files",
+          font: {
+            size: 16
+          }
+        },
+        
       }
     }
   })
@@ -53,11 +77,11 @@ function Graph(props) {
     <div>
       <Line
         data={gistData}
-        options={userOptions}
+        options={gistOptions}
       />
       <Line
         data={filesData}
-        options={userOptions}
+        options={filesOptions}
       />
     </div>
   )
